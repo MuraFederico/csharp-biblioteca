@@ -9,8 +9,8 @@ namespace csharp_biblioteca
     internal class Dvd : Item
     {
 
-        int duration;
-        public Dvd(string id, int duration, string title, string author, DateTime year, string genre, bool isAvailable, int inShelf) : base(id, title, author, year, genre, isAvailable, inShelf)
+        uint duration;
+        public Dvd(string id, uint duration, string title, string author, DateTime year, string genre, bool isAvailable, int inShelf) : base(id, title, author, year, genre, isAvailable, inShelf)
         {
             this.duration = duration;
             this.id = id;
