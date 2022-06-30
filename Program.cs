@@ -46,5 +46,59 @@ items.AddItem(0, 120, "Interstellar", "Christopher Nolan", new DateTime(2014), "
 items.AddItem("978-3-16-148410-0", 900, "Dune", "Frank Herbert", new DateTime(1973), "fantascienza", true, 3);
 items.AddItem(1, 155, "Dune", "Denis Villeneuve", new DateTime(2021), "fantascienza", true, 3);
 
+PrintHome();
 
-items.FindItem(1).PrintItem();
+users.PrintUsers();
+
+void PrintHome()
+{
+    Console.WriteLine("########");
+    Console.WriteLine("# HOME #");
+    Console.WriteLine("########\n");
+
+    Console.WriteLine("1. registrati");
+    Console.WriteLine("2. login\n");
+
+    string choice = Console.ReadLine();
+
+    if(choice == "1")
+    {
+        Console.Clear();
+        PrintRegister();
+    }else if (choice == "2")
+    {
+        Console.Clear();
+        PrintLogin();
+    }else
+    {
+        Console.WriteLine("invalid input, try again");
+        PrintHome();
+    }
+
+
+}
+
+void PrintRegister()
+{
+    Console.Write("Name: ");
+    string name = Console.ReadLine();
+    Console.Write("Surname: ");
+    string surname = Console.ReadLine();
+    Console.Write("Email: ");
+    string email = Console.ReadLine();
+    Console.Write("Password: ");
+    string password = Console.ReadLine();
+    Console.Write("Phone Number: ");
+    string phone = Console.ReadLine();
+
+    users.RegisterUser(surname,name,email,password,phone);
+}
+
+
+void PrintLogin()
+{
+    Console.Write("Email: ");
+    string email = Console.ReadLine();
+    Console.Write("Password: ");
+    string password = Console.ReadLine();
+}
