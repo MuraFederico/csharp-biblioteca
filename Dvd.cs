@@ -10,8 +10,8 @@ namespace csharp_biblioteca
     {
         public int serialNumber;
 
-        DateTime duration;
-        public Dvd(int serialNumber, DateTime duration, string title, string author, DateTime year, string genre, bool isAvailable, int inShelf) : base(title, author, year, genre, isAvailable, inShelf)
+        int duration;
+        public Dvd(int serialNumber, int duration, string title, string author, DateTime year, string genre, bool isAvailable, int inShelf) : base(title, author, year, genre, isAvailable, inShelf)
         {
             this.duration = duration;
             this.serialNumber = serialNumber;

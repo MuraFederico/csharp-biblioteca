@@ -25,6 +25,14 @@ namespace csharp_biblioteca
             this.inShelf = inShelf;
         }
 
+        public void PrintItem()
+        {
+            Console.WriteLine($"title: { this.title}\n" +
+                $"author: {this.author}\n" +
+                $"year: {this.year}\n" +
+                $"aviability: {this.isAvailable}\n");
+        }
+
 
     }
 }

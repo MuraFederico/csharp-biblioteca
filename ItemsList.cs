@@ -10,7 +10,11 @@ namespace csharp_biblioteca
     {
         public List<Item> items;
 
-        public void AddItem(int serialNumber, DateTime duration, string title, string author, DateTime year, string genre, bool isAvailable, int inShelf)
+        public ItemsList()
+        {
+            this.items = new List<Item>();
+        }
+        public void AddItem(int serialNumber, int duration, string title, string author, DateTime year, string genre, bool isAvailable, int inShelf)
         {
             Dvd newDvd = new Dvd(serialNumber, duration, title, author, year, genre, isAvailable, inShelf);
             items.Add(newDvd);
@@ -24,17 +28,21 @@ namespace csharp_biblioteca
 
         public Item FindItem(string identifier)
         {
-            foreach (Boock boock in items) { 
-                if(identifier == boock.title || identifier == boock.ISBN)
-                {
-                    return boock;
-                }
-            }
-            foreach (Dvd dvd in items)
+            foreach (Item item in items)
             {
-                if (identifier == dvd.title)
+                if(item is Boock)
                 {
-                    return dvd;
+                    Boock boock = (Boock)item;
+                    if (identifier == boock.title || identifier == boock.ISBN)
+                    {
+                        return item;
+                    }
+                }else if(item is Dvd)
+                {
+                    if (identifier == item.title)
+                    {
+                        return item;
+                    }
                 }
             }
             return null;
@@ -42,11 +50,15 @@ namespace csharp_biblioteca
 
         public Item FindItem(int identifier)
         {
-            foreach (Dvd dvd in items)
+            foreach (Item item in items)
             {
-                if (identifier == dvd.serialNumber)
+                if(item is Dvd)
                 {
-                    return dvd;
+                    Dvd dvd = (Dvd)item;
+                    if (identifier == dvd.serialNumber)
+                    {
+                        return dvd;
+                    }
                 }
             }
             return null;

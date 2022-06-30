@@ -10,6 +10,11 @@ namespace csharp_biblioteca
     {
         public List<Loan> loans;
 
+        public LoansList()
+        {
+            this.loans = new List<Loan>();
+        }
+
         public void AddLoan(User loaner, Item item)
         {
             Loan newLoan = new Loan(loaner, item);
