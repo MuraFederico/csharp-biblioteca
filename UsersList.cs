@@ -20,6 +20,21 @@ namespace csharp_biblioteca
             users.Add(newUser);
         }
 
+        public User LogIn(string email, string password)
+        {
+            foreach (User user in users)
+            {
+                if(user.email == email && user.password == password)
+                {
+                    Console.WriteLine($"Welcome {user.name} {user.surname}\n");
+                    user.isLogged = true;
+                    return user;
+                }
+            }
+            Console.WriteLine("wrong credentials");
+            return null;
+        }
+
         public void PrintUsers()
         {
             foreach (User user in users)

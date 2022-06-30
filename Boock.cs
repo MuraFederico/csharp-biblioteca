@@ -9,13 +9,12 @@ namespace csharp_biblioteca
     internal class Boock : Item
     {
 
-        public string ISBN;
         public int numberPages;
 
-        public Boock(string ISBN, int numberPages, string title, string author, DateTime year, string genre, bool isAvailable, int inShelf) : base(title, author, year, genre, isAvailable, inShelf)
+        public Boock(string id, int numberPages, string title, string author, DateTime year, string genre, bool isAvailable, int inShelf) : base(id, title, author, year, genre, isAvailable, inShelf)
         {
             this.numberPages = numberPages;
-            this.ISBN = ISBN;
+            this.id = id;
         }
     }
 }

@@ -39,5 +39,16 @@ namespace csharp_biblioteca
             loans.Add(newLoan);
             itemLoaned.isAvailable = false;
         }
+
+        public void PrintLoans()
+        {
+            foreach (Loan loan in loans)
+            {
+                Console.WriteLine($"{loan.loaner.name}\n" +
+                    $"{loan.itemLoaned.title}\n" +
+                    $"{loan.startLoan}\n" +
+                    $"{loan.endLoan}");
+            }
+        }
     }
 }

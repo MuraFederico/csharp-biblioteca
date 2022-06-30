@@ -13,6 +13,7 @@ namespace csharp_biblioteca
         public string email;
         public string password;
         public string phoneNumber;
+        public bool isLogged;
 
         public User(string surname, string name, string email, string password, string phoneNumber)
         {
@@ -21,6 +22,7 @@ namespace csharp_biblioteca
             this.email = email;
             this.password = password;
             this.phoneNumber = phoneNumber;
+            isLogged = false;
         }
 
 

@@ -42,16 +42,22 @@ users.RegisterUser("Mura", "Federico", "federico@mail.it", "asdfasdf", "12345678
 users.RegisterUser("Alessio", "Vitiello", "alessio@mail.it", "asdfasdf", "123456789");
 users.RegisterUser("Margherita", "Laura", "laura@mail.it", "asdfasdf", "123456789");
 
-items.AddItem(0, 120, "Interstellar", "Christopher Nolan", new DateTime(2014), "fantascienza", true, 3);
+items.AddItem("0", 120, "Interstellar", "Christopher Nolan", new DateTime(2014), "fantascienza", true, 3);
 items.AddItem("978-3-16-148410-0", 900, "Dune", "Frank Herbert", new DateTime(1973), "fantascienza", true, 3);
-items.AddItem(1, 155, "Dune", "Denis Villeneuve", new DateTime(2021), "fantascienza", true, 3);
+items.AddItem("1", 155, "Dune", "Denis Villeneuve", new DateTime(2021), "fantascienza", true, 3);
 
-PrintHome();
 
-users.PrintUsers();
+User logged = null;
 
-void PrintHome()
+PrintHome(logged);
+
+loans.PrintLoans();
+
+/*users.PrintUsers();*/
+
+void PrintHome(User logged)
 {
+    Console.Clear();
     Console.WriteLine("########");
     Console.WriteLine("# HOME #");
     Console.WriteLine("########\n");
@@ -68,18 +74,20 @@ void PrintHome()
     }else if (choice == "2")
     {
         Console.Clear();
-        PrintLogin();
+        PrintLogin(logged);
     }else
     {
         Console.WriteLine("invalid input, try again");
-        PrintHome();
+        PrintHome(logged);
     }
-
-
 }
 
 void PrintRegister()
 {
+    Console.WriteLine("############");
+    Console.WriteLine("# REGISTER #");
+    Console.WriteLine("############\n");
+
     Console.Write("Name: ");
     string name = Console.ReadLine();
     Console.Write("Surname: ");
@@ -95,10 +103,79 @@ void PrintRegister()
 }
 
 
-void PrintLogin()
+void PrintLogin(User logged)
 {
+    Console.WriteLine("#########");
+    Console.WriteLine("# LOGIN #");
+    Console.WriteLine("#########\n");
+
     Console.Write("Email: ");
     string email = Console.ReadLine();
     Console.Write("Password: ");
     string password = Console.ReadLine();
+    logged = users.LogIn(email, password);
+    if (logged.isLogged)
+    {
+        LoggedHome(logged);
+    }
+    else
+    {
+        PrintHome(logged);
+    }
+}
+
+void LoggedHome(User logged)
+{
+    Console.Write("find item by name or code: ");
+    string identifier = Console.ReadLine();   
+      
+    List<Item> results = new List<Item>();
+
+    items.FindItem(identifier).ForEach(item => results.Add(item));
+
+    Console.WriteLine("items found: \n");
+
+    int i = 1;
+    foreach (Item item in results)
+    {
+        Console.WriteLine($"{i}. {item.id}");
+        i++;
+    }
+
+    Console.Write("select an item: ");
+
+    int choice = int.Parse(Console.ReadLine());
+    
+    Item selectedItem = results[choice];
+
+    ItemActions(selectedItem, logged);
+}
+
+void ItemActions(Item selectedItem, User logged)
+{
+    Console.Clear();
+    Console.WriteLine("###########");
+    Console.WriteLine("# ACTIONS #");
+    Console.WriteLine("###########\n");
+
+    Console.WriteLine("1. print details");
+    Console.WriteLine("2. loan");
+    Console.WriteLine("3. give back\n");
+
+    string choice = Console.ReadLine();
+
+    if(choice == "1")
+    {
+        selectedItem.PrintItem();
+    }else if(choice == "2")
+    {
+        loans.MakeLoan(logged, selectedItem);
+    }else if(choice == "3")
+    {
+
+    }else
+    {
+        Console.WriteLine("invalid input");
+        ItemActions(selectedItem, logged);
+    }
 }
